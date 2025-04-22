@@ -12,12 +12,12 @@ b_ci = -0.3076
 st.set_page_config(page_title="LDL-C <55 mg/dl risk calculator")
 st.title("Estimation for ACS patients treated without PCSK9 inhibitors")
 
-st.markdown("Ingrese los datos del paciente para estimar la probabilidad de lograr LDL < 55.")
+st.markdown("Required variables")
 
 # Entradas del usuario
 ldl = st.slider("LDL (mg/dL)", min_value=50, max_value=200, value=100)
 estatinas = st.radio("¿On-treatment with statins?", [0, 1], format_func=lambda x: "Yes" if x else "No")
-edad = st.slider("Edad", min_value=18, max_value=100, value=60)
+edad = st.slider("Age", min_value=18, max_value=100, value=60)
 dm = st.radio("¿Diabetes mellitus?", [0, 1], format_func=lambda x: "Yes" if x else "No")
 ci = st.radio("¿Previous coronary heart disease?", [0, 1], format_func=lambda x: "Yes" if x else "No")
 
@@ -33,5 +33,5 @@ logit = (
 prob = 1 / (1 + np.exp(-logit))
 
 # Resultado
-st.subheader("Resultado")
-st.metric("Probabilidad estimada de LDL < 55", f"{prob*100:.1f}%")
+st.subheader("Result")
+st.metric("Estimated probability of LDL-C <55 mg/dl with statins plus ezetimibe", f"{prob*100:.1f}%")
