@@ -1,14 +1,13 @@
 import streamlit as st
 import numpy as np
 
-# Coeficientes del modelo ajustado con interacción y comorbilidades
-b0 = 0.3281
-b_ldl = -0.0129
-b_estat = 0.1235
-b_interact = -0.0075
-b_edad = -0.0073
+# Coeficientes del modelo ajustado sin interacción
+b0 = 0.4974
+b_ldl = -0.0147
+b_estat = -0.4649
+b_edad = -0.0076
 b_dm = 0.5161
-b_ci = -0.3374
+b_ci = -0.3076
 
 st.set_page_config(page_title="Calculadora de Riesgo LDL < 55")
 st.title("Calculadora de Riesgo: LDL < 55 mg/dL")
@@ -23,12 +22,10 @@ dm = st.radio("¿El paciente tiene diabetes mellitus?", [0, 1], format_func=lamb
 ci = st.radio("¿Antecedente de cardiopatía isquémica?", [0, 1], format_func=lambda x: "Sí" if x else "No")
 
 # Cálculo del logit y probabilidad
-interaction = ldl * estatinas
 logit = (
     b0 +
     b_ldl * ldl +
     b_estat * estatinas +
-    b_interact * interaction +
     b_edad * edad +
     b_dm * dm +
     b_ci * ci
