@@ -9,17 +9,17 @@ b_edad = -0.0076
 b_dm = 0.5161
 b_ci = -0.3076
 
-st.set_page_config(page_title="Calculadora de Riesgo LDL < 55")
-st.title("Calculadora de Riesgo: LDL < 55 mg/dL")
+st.set_page_config(page_title="LDL-C <55 mg/dl risk calculator")
+st.title("Estimation for ACS patients treated without PCSK9 inhibitors")
 
 st.markdown("Ingrese los datos del paciente para estimar la probabilidad de lograr LDL < 55.")
 
 # Entradas del usuario
 ldl = st.slider("LDL (mg/dL)", min_value=50, max_value=200, value=100)
-estatinas = st.radio("¿El paciente está tomando estatinas?", [0, 1], format_func=lambda x: "Sí" if x else "No")
+estatinas = st.radio("¿On-treatment with statins?", [0, 1], format_func=lambda x: "Yes" if x else "No")
 edad = st.slider("Edad", min_value=18, max_value=100, value=60)
-dm = st.radio("¿El paciente tiene diabetes mellitus?", [0, 1], format_func=lambda x: "Sí" if x else "No")
-ci = st.radio("¿Antecedente de cardiopatía isquémica?", [0, 1], format_func=lambda x: "Sí" if x else "No")
+dm = st.radio("¿Diabetes mellitus?", [0, 1], format_func=lambda x: "Yes" if x else "No")
+ci = st.radio("¿Previous coronary heart disease?", [0, 1], format_func=lambda x: "Yes" if x else "No")
 
 # Cálculo del logit y probabilidad
 logit = (
